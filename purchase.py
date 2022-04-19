@@ -45,14 +45,14 @@ class Purchase(metaclass=PoolMeta):
 
             shipments = []
             for shipment in purchase.shipments:
-                if not any([x.state != 'cancel' for x in shipment.moves]):
+                if not any([x.state != 'cancelled' for x in shipment.moves]):
                     shipments.append(shipment)
             if shipments:
                 ShipmentIn.cancel(shipments)
 
             shipments = []
             for shipment in purchase.shipment_returns:
-                if not any([x.state != 'cancel' for x in shipment.moves]):
+                if not any([x.state != 'cancelled' for x in shipment.moves]):
                     shipments.append(shipment)
             if shipments:
                 ShipmentInReturn.cancel(shipments)
