@@ -59,9 +59,9 @@ class Purchase(metaclass=PoolMeta):
 
     @classmethod
     def get_pending_moves(cls, purchases, name=None):
-        result = {}
+        result = dict((p.id, []) for p in purchases)
+
         for purchase in purchases:
-            result[purchase.id] = []
             for line in purchase.lines:
                 result[purchase.id].extend([m.id for m in line.pending_moves])
         return result
