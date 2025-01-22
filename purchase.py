@@ -10,7 +10,7 @@ class Purchase(metaclass=PoolMeta):
     __name__ = 'purchase.purchase'
 
     pending_moves = fields.Function(fields.One2Many('stock.move', None,
-            'Pending Moves'), 'get_pending_moves')
+            'Pending Moves'), 'get_pending_moves', setter='set_pending_moves')
 
     @classmethod
     def __setup__(cls):
@@ -66,6 +66,10 @@ class Purchase(metaclass=PoolMeta):
             for line in purchase.lines:
                 result[purchase.id].extend([m.id for m in line.pending_moves])
         return result
+
+    @classmethod
+    def set_pending_moves(cls, purchases, name, value):
+        pass
 
 
 class PurchaseLine(metaclass=PoolMeta):
