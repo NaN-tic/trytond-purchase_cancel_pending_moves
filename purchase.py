@@ -9,7 +9,7 @@ from trytond.transaction import Transaction
 class Purchase(metaclass=PoolMeta):
     __name__ = 'purchase.purchase'
 
-    pending_moves = fields.Function(fields.One2Many('stock.move', None,
+    pending_moves = fields.Function(fields.Many2Many('stock.move', None, None,
             'Pending Moves'), 'get_pending_moves', setter='set_pending_moves')
 
     @classmethod
@@ -75,7 +75,7 @@ class Purchase(metaclass=PoolMeta):
 
 class PurchaseLine(metaclass=PoolMeta):
     __name__ = 'purchase.line'
-    pending_moves = fields.Function(fields.One2Many('stock.move', None,
+    pending_moves = fields.Function(fields.Many2Many('stock.move', None, None,
             'Pending Moves'), 'get_pending_moves')
 
     @classmethod
